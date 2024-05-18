@@ -9,9 +9,9 @@ const poppins = Poppins({
   });
 const Footer: FC<FooterProps> = ({}) => {
     return (
-        <div className="flex flex-col items-center justify-center gap-4 bg-zinc-900 py-4">
+        <div className="flex flex-col items-center justify-center gap-4 bg-zinc-900 p-4">
         <p className={`${poppins.className} text-center text-white text-xs`}>
-            Made for HawkHacks 2024
+            Made for HawkHacks 2024 | Copyright @{new Date().getFullYear()} Proyetei Akanda 
         </p>
     </div>
     );
