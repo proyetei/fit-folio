@@ -79,7 +79,7 @@ const Display: React.FC<DisplayProps> = ({params}) => {
         <TableHeader>
           <TableRow>
             <TableHead>Workout name </TableHead>
-            <TableHead> Rep and sets </TableHead>
+            <TableHead> Sets </TableHead>
           </TableRow>
         </TableHeader>
         {/* keep track of current workout index, save in a variable, and map over that */}
