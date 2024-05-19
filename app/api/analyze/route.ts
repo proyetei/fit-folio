@@ -32,7 +32,7 @@ export async function POST(
               {
                 role: "user",
                 content: ` Use the following workout data to generate the analysis: 
-                These are the workout names: \n${workoutNames}\n\n and reps and set:\n${repAndSet}\n\n corresponding to each workouts. 
+                These are the workout names: \n${workoutNames}\n\n and the sets:\n${repAndSet}\n\n corresponding to each workouts. Remember each rep is 10, so if user enters 5, that means 5 sets of 10 reps. 
                 Display the workout analysis in the following format:
 
                 Intensity of workouts based on the volume (reps x sets):
