@@ -63,12 +63,13 @@ const Display: React.FC<DisplayProps> = ({params}) => {
               } else {
               return (
               <Card key={index}>
+                <div className="border rounded-xl"> 
                 <CardHeader>
                   <CardTitle>
                     <p className={` text-base text-wrap`}> {eachWorkoutEntry && creationDate ? ` Your workout on ${prettyDate(new Date(creationDate).toISOString())}`: 'Workout info'}</p>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className=' min-h-[100px] bg-slate-900 text-slate-200 p-4'>
+                <CardContent className=' min-h-[100px] text-slate-200 p-4'>
                 <Table>
         <TableCaption>A list of your recent workouts</TableCaption>
         <TableHeader>
@@ -97,6 +98,7 @@ const Display: React.FC<DisplayProps> = ({params}) => {
                   {<DeleteButton workout = {eachWorkoutEntry} /> }
                 </div>
               </CardFooter>
+              </div>
               </Card>
             ); }
         })}

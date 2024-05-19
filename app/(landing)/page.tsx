@@ -4,6 +4,7 @@ import { SignedOut } from "@clerk/nextjs";
 import Landing from "@/components/Landing";
 import { NavbarTwo } from "@/components/NavbarTwo";
 import { redirect } from "next/navigation";
+import Features from "@/components/Features";
 const LandingPage = () => {
   // const {userId} = auth();
   // if (userId){
@@ -12,6 +13,7 @@ const LandingPage = () => {
   return (
     <div>
         <Landing />
+        <Features />
         <Footer />
     </div>
   )

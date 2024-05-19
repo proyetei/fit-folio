@@ -20,7 +20,10 @@ export default function RootLayout({
   return (
     <ClerkProvider appearance={{baseTheme: dark}}>
     <html lang="en">
-      <body className={`${subTitle.className} bg-zinc-900`}>{children}  <Toaster /></body>
+      <body className={`${subTitle.className} bg-[radial-gradient(ellipse_at_right,_var(--tw-gradient-stops))] from-violet-900 via-zinc-900 to-black`}>
+        {children} 
+        <Toaster />
+      </body>
     </html>
     </ClerkProvider>
   );

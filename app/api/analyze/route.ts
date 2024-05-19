@@ -1,10 +1,11 @@
 import { auth } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
 import {OpenAI} from "openai"
-import { AllWorkoutsSchema } from "@/lib/formValidation";
+import { AllWorkoutsSchema, FormSchema } from "@/lib/formValidation";
 const openai = new OpenAI({
     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
+const listOfMuscles = ["Pectorals", "Biceps", "Triceps", "Deltoids", "Latissimus Dorsi", "Quadriceps", "Hamstrings", "Glutes", "Abdominals", "Calves"];
 
 export async function POST(
     req: Request,
@@ -13,16 +14,8 @@ export async function POST(
         const { userId } = auth();
         const body = await req.json();
         const {
-            allWorkouts
-        } = AllWorkoutsSchema.parse(body);
-        //   const entryData = allWorkouts.map((workout) => ({
-        //       workoutNames: workout.workoutNames,
-        //       repAndSet: workout.repAndSet,
-        //     }))
-        const workoutNames = allWorkouts.map(workout => workout.workoutNames).join(", ");
-        const repAndSet = allWorkouts.map(workout => workout.workoutNames).join(", ");
-        console.log("Workout names: ", workoutNames)
-        console.log("repAndSet: ", repAndSet)
+            workoutNames, repAndSet
+        } = FormSchema.parse(body);
         if (!userId){
             return new NextResponse("Unauthorized", {status: 401});
         }
@@ -34,11 +27,17 @@ export async function POST(
             messages: [
               {
                 role: "system",
-                content: `Analyze the increase or decrease in the number of reps and sets for each workout. Highlight any gaps or inconsistencies in the workout routine. Measure the intensity of workouts based on the volume (reps x sets).`,
+                content: `Tell the user what muscles they should target more for balance. Refer to list of muscles: ${listOfMuscles}. Then tell them what workout they should do to target that muscle. Additonally, measure the intensity of workouts based on the volume (reps x sets).`,
               },
               {
                 role: "user",
-                content: `Use the following workout data to generate the analysis: These are the workout names: \n${workoutNames}\n\n and reps and set:\n${repAndSet}\n\n corresponding to each workouts. Display the workout analysis in the following format:\n- Increase or decrease in the number of reps and sets for each workout:\n- Any gaps or inconsistencies:\n- Intensity of workouts based on the volume (reps x sets):\n- What muscles the user should target more:\n`,
+                content: ` Use the following workout data to generate the analysis: 
+                These are the workout names: \n${workoutNames}\n\n and reps and set:\n${repAndSet}\n\n corresponding to each workouts. 
+                Display the workout analysis in the following format:
+
+                Intensity of workouts based on the volume (reps x sets):
+                
+                What muscles the user should target more:\n`,
               }
             ],
           });

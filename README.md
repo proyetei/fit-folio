@@ -1,4 +1,4 @@
-# WorkoutWiz
+# FitFolio
 
 Submitted to: https://taikai.network/hackbox/hackathons/hawkhacks
 

@@ -34,12 +34,17 @@ const GenerateButton: React.FC = () => {
             repAndSet: workout.repAndSet
         }));
     });
+    const workoutNames = workoutInfo.map(workout => workout.workoutNames).join(", ");
+    const repAndSet = workoutInfo.map(workout => workout.repAndSet).join(", ");
+    console.log("Workout names: ", workoutNames)
+    console.log("repAndSet: ", repAndSet)
     console.log(workoutInfo)
     const analyzeEntries = async () => {
         setIsLoading(true);
         try {
             const response = await axios.post("/api/analyze", {
-                workouts: workoutInfo
+                workoutNames: workoutNames,
+                repAndSet: repAndSet,
             })
             setAnalysisResult(response.data.content);
             console.log(response.data.content)
@@ -78,7 +83,11 @@ const GenerateButton: React.FC = () => {
                 <p className="flex items-center gap-2">
                 Loading... <Loader2 className="animate-spin" />
                 </p>
-            ) : (analysisResult)}
+            ) : (analysisResult?.split("\n").map((paragraph, index) => (
+                <p key={index} style={{ margin: '10px 0' }}>
+                  {paragraph}
+                </p>)))
+                }
             </div>
         </div>
     )
