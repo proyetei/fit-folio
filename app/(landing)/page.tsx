@@ -7,11 +7,11 @@ import { redirect } from "next/navigation";
 import Features from "@/components/Features";
 import { newUser } from "@/lib/newUser";
 export default async function LandingPage(){
-  const user = await newUser();
+  // const user = await newUser();
 
-  if (user) {
-    redirect("/dashboard");
-  }
+  // if (user) {
+  //   redirect("/dashboard");
+  // }
   return (
     <div>
         <Landing />
