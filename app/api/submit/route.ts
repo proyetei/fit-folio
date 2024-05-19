@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { db } from '@/lib/db';
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { Form } from "react-hook-form";
 
 export async function GET(

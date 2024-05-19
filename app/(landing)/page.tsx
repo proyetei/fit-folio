@@ -1,5 +1,4 @@
 import Footer from "@/components/Footer";
-import { auth } from "@clerk/nextjs";
 import { SignedOut } from "@clerk/nextjs";
 import Landing from "@/components/Landing";
 import { NavbarTwo } from "@/components/NavbarTwo";
