@@ -1,5 +1,5 @@
 
-import { initializeUser } from "@/lib/newUser";
+import { newUser } from "@/lib/newUser";
 import { AllWorkoutsSchema, FormSchema } from '@/lib/formValidation';
 import { NextResponse } from "next/server";
 import { db } from '@/lib/db';
@@ -32,7 +32,7 @@ export async function GET(
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-  const user = await initializeUser();
+  const user = await newUser();
   const {
     allWorkouts
   } = AllWorkoutsSchema.parse(body);
