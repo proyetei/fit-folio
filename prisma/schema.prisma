@@ -30,5 +30,5 @@ model Entry {
   createdAt     DateTime? @default(now())
   user          User?     @relation(fields: [userId], references: [id])
   userId        String?   @db.ObjectId
-
+  @@unique([id, userId])
 }

@@ -20,6 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import LoadingAnimation from "./LoadingAnimation";
+import DeleteButton from "./DeleteButton";
 interface DisplayProps {
     params: Entry[]
 }
@@ -53,6 +54,13 @@ const Display: React.FC<DisplayProps> = ({params}) => {
               const creationDate = eachWorkoutEntry?.createdAt
               // destructure the type as arrays of objects
               const workoutInfo = eachWorkoutEntry?.allWorkouts as Array<{ workoutNames: string; repAndSet: string }>;
+              if (!workoutInfo || workoutInfo.length === 0) {
+                return (
+                  <p key={index} className="flex items-center gap-2 text-slate-100">
+                    No workout found.. Click the add workout button to add one!
+                  </p>
+                );
+              } else {
               return (
               <Card key={index}>
                 <CardHeader>
@@ -85,11 +93,15 @@ const Display: React.FC<DisplayProps> = ({params}) => {
                   {entry && <DeleteButton post = {entry}/>}
                 {entry && <EditButton post={entry} />}
                 </div> */}
+                <div className="flex items-center justify-center p-4">
+                  {<DeleteButton workout = {eachWorkoutEntry} /> }
+                </div>
               </CardFooter>
               </Card>
-            );
-          })}
-        </div> )}
+            ); }
+        })}
+        </div>
+       )}
       </div>
     )
 }

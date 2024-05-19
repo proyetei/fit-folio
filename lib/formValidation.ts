@@ -1,8 +1,6 @@
 import { z } from "zod";
 export const FormSchema = z.object({
-    workoutNames: z.string({
-        required_error: "Please select a workout name.",
-      }),
+    workoutNames: z.string().min(1, 'Name is required'),
     repAndSet: z.string()
 })
 

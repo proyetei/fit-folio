@@ -4,7 +4,6 @@ import Display from "./Display"
 import { Entry } from "@prisma/client"
 import { Suspense } from "react"
 import LoadingAnimation from "./LoadingAnimation"
-import SetCalories from "./SetCalories"
 interface DisplayProps {
     params: Entry[],
 }
@@ -17,9 +16,6 @@ const Dashboard: React.FC<DisplayProps> = ({params}) => {
                 <div className="py-6">
                 <p className={`${mainTitle.className} text-3xl md:text-5xl text-left font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-700 to-purple-700 py-2`}> Workout History </p>
                 <hr />
-                <div className="py-4">
-                    <SetCalories />
-                </div>
                 <div className="py-4">
                 <Display params={params}/>
                 </div>
