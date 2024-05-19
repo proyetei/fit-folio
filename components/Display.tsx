@@ -66,12 +66,16 @@ const Display: React.FC<DisplayProps> = ({params}) => {
                 <div className="border rounded-xl"> 
                 <CardHeader>
                   <CardTitle>
-                    <p className={` text-base text-wrap`}> {eachWorkoutEntry && creationDate ? ` Your workout on ${prettyDate(new Date(creationDate).toISOString())}`: 'Workout info'}</p>
+                    <p className={` text-base text-wrap`}> {eachWorkoutEntry && creationDate ? ` ${eachWorkoutEntry.title} `: 'Workout info'}</p>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className=' min-h-[100px] text-slate-200 p-4'>
                 <Table>
-        <TableCaption>A list of your recent workouts</TableCaption>
+        <TableCaption>
+          <hr/>
+          <p className="py-2"> {eachWorkoutEntry && creationDate ? `Workout date: ${prettyDate(new Date(creationDate).toISOString())}`: ''}</p>
+          <hr/>
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Workout name </TableHead>

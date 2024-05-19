@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { db } from '@/lib/db';
 import { getCurrentUser } from "@/lib/getCurrentUser";
 import { redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 import { Form } from "react-hook-form";
 
 export async function GET(
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     const body = await req.json();
   const user = await newUser();
   const {
-    allWorkouts
+    allWorkouts, title
   } = AllWorkoutsSchema.parse(body);
   const entryData = {
     allWorkouts: allWorkouts.map((workout) => ({
@@ -42,10 +42,11 @@ export async function POST(req: Request) {
       repAndSet: workout.repAndSet,
     })),
     userId: user?.id,
+    title: title,
   };
 
   const createdEntry = await db.entry.create({
-    data: entryData,
+    data: entryData
   });
 
     return NextResponse.json({ createdEntry });

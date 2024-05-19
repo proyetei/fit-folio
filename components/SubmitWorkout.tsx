@@ -69,8 +69,9 @@ export default function SubmitWorkout() {
         try {
             // Extract only the allWorkouts array from the data
             const { allWorkouts } = data;
+            const { title } = data;
             // Send the allWorkouts array to the backend
-            const response = await axios.post("/api/submit", { allWorkouts });
+            const response = await axios.post("/api/submit", { allWorkouts, title });
             await axios.get("/api/submit", {});
             form.reset();
             router.push("/dashboard")
@@ -96,6 +97,20 @@ export default function SubmitWorkout() {
         <div className="items-center justify-center text-center">
             <Form {...form}>
             <form onSubmit={handleSubmit(onSubmit)} className="py-4">
+                <div className="grid md:grid-cols-2 grid-cols-1 pb-8">
+                <div className="p-2">
+                    <FormField
+                    control={control}
+                    name="title"
+                    render={({ field }) => (
+                    <FormItem>
+                        <FormLabel> 
+                            <div className=" md:text-base text-left text-sm text-slate-100"> Please enter a title for your submission </div> 
+                        </FormLabel>
+                        <Input type="text" {...register('title')} placeholder="title" className="bg-zinc-900 border-none text-slate-100 md:w-[300px] w-full"/>
+                        <FormMessage/>
+                    </FormItem> )} />
+                </div>
             <div className="p-2 ">
             <FormField control={control} name="numberOfWorkouts" render={({ field }) => (
                 <FormItem>
@@ -104,7 +119,7 @@ export default function SubmitWorkout() {
                     </div>
                     <FormControl>
                         <Select {...register('numberOfWorkouts')} onValueChange={field.onChange} defaultValue={field.value}>
-                                <SelectTrigger className="md:w-[250px] w-full">
+                                <SelectTrigger className="md:w-[300px] w-full">
                                     <SelectValue placeholder="Select number of workouts" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -117,6 +132,7 @@ export default function SubmitWorkout() {
                         <FormMessage>{errors.numberOfWorkouts?.message}</FormMessage>
                 </FormItem>
                 )} />
+            </div>
             </div>
                 {fields.map((item, i) => (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:p-6 py-4 items-center justify-center" key={item.id}>
@@ -140,9 +156,9 @@ export default function SubmitWorkout() {
                             render={({ field }) => (
                             <FormItem>
                                 <FormLabel> 
-                                    <div className={` p-4 text-md `}> <span className=" md:text-base text-sm text-slate-100"> Enter reps(as x), and sets(as y) </span> </div> 
+                                    <div className=" p-4 md:text-base text-sm text-slate-100"> Enter amount of sets. </div> 
                                 </FormLabel>
-                                <Input {...register(`allWorkouts.${i}.repAndSet`)} type="text" placeholder="Enter number as: x,y" className="bg-zinc-900 border-none text-slate-100"/>
+                                <Input {...register(`allWorkouts.${i}.repAndSet`)} type="text" placeholder="Each set is 10 reps" className="bg-zinc-900 border-none text-slate-100"/>
                                 <FormMessage/>
                             </FormItem>
                         )}/>

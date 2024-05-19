@@ -7,4 +7,5 @@ export const FormSchema = z.object({
 export const AllWorkoutsSchema = z.object({
     numberOfWorkouts: z.string().optional(),
     allWorkouts: z.array(FormSchema),
+    title: z.string(),
 });
