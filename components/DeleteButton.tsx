@@ -50,10 +50,12 @@ const DeleteButton: React.FC<DeleteEntryProps> = ({ workout }) => {
     }, [workout.id, router, toast]);
 
     return (
+        <div className="p-4">
     <AlertDialog>
         <AlertDialogTrigger asChild>
             <Button variant="destructive" disabled={loading}> Delete </Button>
         </AlertDialogTrigger>
+        <div className="mx-4">
         <AlertDialogContent>
             <AlertDialogHeader>
                 <AlertDialogTitle className="text-slate-900">Are you absolutely sure?</AlertDialogTitle>
@@ -64,7 +66,9 @@ const DeleteButton: React.FC<DeleteEntryProps> = ({ workout }) => {
                 <AlertDialogAction onClick={ (handleSubmission)}>Continue</AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>
+        </div>
       </AlertDialog>
+      </div>
     )
   }
 export default DeleteButton
